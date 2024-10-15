@@ -1,0 +1,15 @@
+kind: Pod                        # Object type Pod
+apiVersion: v1                   # API Version of Pod Object
+metadata:                        # Object Describtion
+  name: testpod2                 # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning communication/network connection between more than two containers from different pods (IntraPod Communication).
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  containers:
+    - name: c02
+      image: httpd
+      ports:
+       - containerPort: 80   

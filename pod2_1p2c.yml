@@ -1,0 +1,15 @@
+kind: Pod                  # Object type
+apiVersion: v1             # API Version
+metadata:                  # Object Describtion
+  name: testpod            # Name of the object also the name of the pod
+  annotations:             # Description of the pod, it's usage.
+    description: Pod with two containers.
+spec:                      # Specifing the congfiguration of the containers
+  containers:              # Containers details 
+    - name: c01            # Name of the container 
+      image: ubuntu        # Base image which is used to create container  
+      command: ["/bin/bash", "-c", "while true; do echo Hello-World; sleep 5; done"]
+    - name: c02            # Name of the container 
+      image: centos        # Base image which is used to create container  
+      command: ["/bin/bash", "-c", "while true; do echo Hello-World of DevOps; sleep 5; done"]
+

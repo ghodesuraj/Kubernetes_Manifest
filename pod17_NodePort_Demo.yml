@@ -1,0 +1,25 @@
+kind: Deployment                 # Object type Deployment
+apiVersion: apps/v1              # API Version of Deployment Object
+metadata:                        # Object Describtion
+  name: mydeployments            # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning NodePort, how to create NodePort, how to assign NodePort to to Pods. NodePort is service of K8S, which allows traffic to reach K8S service from outside the cluster & also allows outsider to access services running inside cluster from the same port. NodePorts range from 30,000–32,767. If left empty, Kubernetes will select a free port in that range.
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  replicas: 1
+  selector:                      # Instructing controller which containers template to belong from below
+   matchLabels:
+    name: deployment             # Should match with service file label
+  template:
+    metadata:
+      labels:
+        name: deployment
+    spec:
+     containers:
+     - name: c02
+       image: httpd
+       ports:
+       - containerPort: 80       # Instructing controller to open 80 port of the container, And later this port should match with port in service file. 
+

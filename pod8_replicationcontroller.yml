@@ -1,0 +1,27 @@
+kind: ReplicationController      # Object type ReplicationController
+apiVersion: v1                   # API Version
+metadata:                        # Object Describtion
+  name: myreplicationcontroller  # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning pod creation based on ReplicationController Object & labels & selectors.
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  replicas: 4                    # Desired number of pods
+  selector:                      # Instructing controller which container's template, pod should belong
+    myname: suraj                # This must match the container's template labels
+  template:                      # Template element defines a template to launch a new pod
+    metadata:
+      labels:                    # Defining label for container's template
+        myname: suraj            # Selector's value should match the labels value given in the pod template 
+    spec:                        # Specifing the congfiguration of the containers
+     containers:                 # Containers details 
+     - name: c01                 # Name of the container 
+       image: ubuntu             # Base image which is used to create container  
+       command: ["/bin/bash", "-c", "while true; do echo Hello-World; sleep 5; done"]
+       env:                      # Defining the environment variables to be used inside the container
+       - name: MYNAME            # Key of the environment variable
+         value: Suraj            # Value of the environment variable  
+       - name: Class             # Key of the environment variable
+         value: DevOps           # Value of the environment variable

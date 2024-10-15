@@ -1,0 +1,24 @@
+kind: Pod                  # Object type
+apiVersion: v1             # API Version
+metadata:                  # Object Describtion
+  name: testpod5           # Name of the object also the name of the pod
+  annotations:             # Description of the pod, it's usage.
+    description: Pod with two Environment variables.
+spec:                      # Specifing the congfiguration of the containers
+  containers:              # Containers details 
+    - name: c01            # Name of the container 
+      image: ubuntu        # Base image which is used to create container  
+      command: ["/bin/bash", "-c", "while true; do echo Hello-World; sleep 5; done"]
+      env:                 # Defining the environment variables to be used inside the container
+      - name: MYNAME       # Key of the environment variable
+        value: Suraj       # Value of the environment variable  
+      - name: Class        # Key of the environment variable
+        value: DevOps      # Value of the environment variable
+    - name: c02            # Name of the container
+      image: ubuntu        # Base image which is used to create container
+      command: ["/bin/bash", "-c", "while true; do echo Hello-World; sleep 5; done"]
+      env:                 # Defining the environment variables to be used inside the container
+      - name: MYNAME       # Key of the environment variable
+        value: Goku       # Value of the environment variable
+      - name: Class        # Key of the environment variable
+        value: Karate      # Value of the environment variable

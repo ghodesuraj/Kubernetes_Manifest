@@ -1,0 +1,24 @@
+kind: Deployment                 # Object type Deployment
+apiVersion: apps/v1              # API Version of Deployment Object
+metadata:                        # Object Describtion
+  name: mydeployments            # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning ClusterIp, how to create ClusterIP, how to assign ClusterIP to to Pods. ClusterIP is a static IP assigned to Pods so that even after auto healing pod or containers will be having same IP address. It is also called as Virtual IP(VIP).
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  replicas: 1
+  selector:                     # Instructing controller which containers template to belong from below
+   matchLabels:
+    name: deployment            # Should match with service file label
+  template:
+    metadata:
+      labels:
+        name: deployment
+    spec:
+     containers:
+     - name: c02
+       image: httpd
+       ports:
+       - containerPort: 80      # Instructing controller to open 80 port of the container, And later this port should match with port in service file. 
