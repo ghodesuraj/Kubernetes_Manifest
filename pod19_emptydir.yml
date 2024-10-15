@@ -1,0 +1,26 @@
+kind: Pod                        # Object type Deployment
+apiVersion: v1                   # API Version of Deployment Object
+metadata:                        # Object Describtion
+  name: myemptydirpod            # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning emptydir volume type, it is initially empty and can be used by all containers in a Pod to store temporary data. Storing data at Pod Level.
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  containers:
+  - name: c1
+    image: centos
+    command: ["/bin/bash", "-c", "sleep 10000"] # Running sleep comand for 10000 secs
+    volumeMounts:                               # Mount defination inside the container
+    - name: podvolume                           # Volume name of pod
+      mountPath: "/tmp/c1dir"                   # Path of the folder/Volume inside the container to share
+  - name: c2
+    image: centos
+    command: ["/bin/bash", "-c", "sleep 10000"] # Running sleep comand for 10000 secs
+    volumeMounts:                               # Mount defination inside the container
+    - name: podvolume                           # Volume name of pod
+      mountPath: "/tmp/c2dir"                   # Path of the folder/Volume inside the container to share
+  volumes:                                      # Defining the volume
+  - name: podvolume                             # Name of the volume of pod
+    emptyDir: {}                                # Defining Volume Type

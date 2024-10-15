@@ -1,0 +1,16 @@
+apiVersion: v1                             # API Version of Persistence Volume Claim Object
+kind: PersistentVolumeClaim                # Defining the object type which is Persistence Volume Claim
+metadata:                                  # Object Describtion
+  name: myebsvol                           # Name of the Persistence Volume object also the name of the PV.
+  annotations:                             # Description of the pod, it's usage.
+    description: Learning Persistence Volume Claim. To claim a portion from the total storage allocted to Persistence Volume Object. We can allocated a portion of PVO or we can allocat the whole storage allocated to PVO.
+  labels:                                  # Defining labels details
+   day: fri                                # Key1: value1
+   lecture: K8S                            # Key2: value2
+spec:
+  accessModes:                             # Specifing the access modes for the volume like Read, Write
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi                         # Out of 2GiB, I want only 1GiB as Persistence Volume Claim Object (Like this we can create any number of Persistence Volume Claim Object)
+  

@@ -1,0 +1,36 @@
+kind: Deployment                 # Object type Deployment
+apiVersion: apps/v1              # API Version of Deployment Object
+metadata:                        # Object Describtion
+  name: myebspvcdeploy           # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Creating Deployment Pod whoes volume mount has been mapped to Persistence Volume Claim.
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mypv
+  template:
+    metadata:
+      labels:
+        app: mypv
+    spec:
+      containers:
+      - name: c1
+        image: centos
+        command: ["/bin/bash", "-c", "sleep 10000"]  # Running sleep comand for 10000 secs
+        volumeMounts:                                # Mount defination inside the container
+        - name: myvolume                             # Specifing to which volume this containers volume should belong/linked/mapped
+          mountPath: "/tmp/c1dir"                    # Path of the directory/folder/Volume inside the container which will be linked to hostPath volume defined on the host machine.
+      - name: c2
+        image: centos
+        command: ["/bin/bash", "-c", "sleep 10000"]  # Running sleep comand for 10000 secs
+        volumeMounts:                                # Mount defination inside the container
+        - name: myvolume                            # Specifing to which volume this containers volume should belong/linked/mapped
+          mountPath: "/tmp/c2dir"                   # Path of the directory/folder/Volume inside the container which will be linked to hostPath volume defined on the host machine.
+      volumes:                                       # Defining the volume
+      - name: myvolume                               # Name of the hostPath volume 
+        persistentVolumeClaim:                       # Defining Volume Type
+          claimName:  myebsvol                       # hostPath volume's directory on host machine

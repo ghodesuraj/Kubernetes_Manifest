@@ -1,0 +1,27 @@
+kind: Pod                        # Object type Deployment
+apiVersion: v1                   # API Version of Deployment Object
+metadata:                        # Object Describtion
+  name: myhostpathtest           # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning hostPath Volume type, Storing data at hosts machine level.
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  containers:
+  - name: c1
+    image: centos
+    command: ["/bin/bash", "-c", "sleep 10000"]  # Running sleep comand for 10000 secs
+    volumeMounts:                                # Mount defination inside the container
+    - name: hostvolume                           # Specifing to which volume this containers volume should belong/linked/mapped
+      mountPath: "/tmp/c1dir"                    # Path of the directory/folder/Volume inside the container which will be linked to hostPath volume defined on the host machine.
+  - name: c2
+    image: centos
+    command: ["/bin/bash", "-c", "sleep 10000"]  # Running sleep comand for 10000 secs
+    volumeMounts:                               # Mount defination inside the container
+     - name: hostvolume                          # Specifing to which volume this containers volume should belong/linked/mapped
+       mountPath: "/tmp/c2dir"                   # Path of the directory/folder/Volume inside the container which will be linked to hostPath volume defined on the host machine.
+  volumes:                                       # Defining the volume
+  - name: hostvolume                             # Name of the hostPath volume 
+    hostPath:                                    # Defining Volume Type
+      path: /Users/wanderwise/Desktop/DevOps/hostdir    # hostPath volume's directory on host machine

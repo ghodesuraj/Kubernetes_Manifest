@@ -1,0 +1,19 @@
+apiVersion: v1                             # API Version of Persistence Volume Object
+kind: PersistentVolume                     # Defining the object type which is Persistence Volume
+metadata:                                  # Object Describtion
+  name: myebsvol                           # Name of the Persistence Volume object also the name of the PV.
+  annotations:                             # Description of the pod, it's usage.
+    description: Learning Persistence Volume type, Storing data at Cloud Level OR out side the local machine.
+  labels:                                  # Defining labels details
+   day: fri                                # Key1: value1
+   lecture: K8S                            # Key2: value2
+spec:
+  capacity:
+    storage: 2Gi                           # Out of 20GiB, I want only 2GiB as Persistence Volume Object (Like this we can create any number of Persistence Volume Object)
+  accessModes:                             # Specifing the access modes for the volume like Read, Write
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle   # Specifing that to reuse the space available after deleteing any data
+  awsElasticBlockStore:                    # Defining the Volume Storage type which is on aws cloude
+    volumeID: vol-03ea1036b925612a4        # Giving the volume ID of the volume created on the aws cloud
+    fsType: ext4
+
