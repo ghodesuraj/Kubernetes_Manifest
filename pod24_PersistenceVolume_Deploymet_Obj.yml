@@ -32,5 +32,5 @@ spec:
           mountPath: "/tmp/c2dir"                    # Path of the directory/folder/Volume inside the container which will be linked to hostPath volume defined on the host machine.
       volumes:                                       # Defining the volume
       - name: myvolume                               # Name of the hostPath volume 
-        persistentVolumeClaim:                       # Defining Volume Type
-          claimName:  myebsvolclaim                  # hostPath volume's directory on host machine
+        persistentVolumeClaim:
+          claimName: myebsvol                        # hostPath volume's directory on host machine

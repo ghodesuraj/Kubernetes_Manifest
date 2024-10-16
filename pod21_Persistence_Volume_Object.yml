@@ -14,6 +14,6 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle   # Specifing that to reuse the space available after deleteing any data
   awsElasticBlockStore:                    # Defining the Volume Storage type which is on aws cloude
-    volumeID: vol-03ea1036b925612a4        # Giving the volume ID of the volume created on the aws cloud
+    volumeID: vol-04dbd61a0ee0c5a84        # Giving the volume ID of the volume created on the aws cloud
     fsType: ext4
 
