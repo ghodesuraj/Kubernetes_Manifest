@@ -1,0 +1,28 @@
+kind: Pod                        # Object type Deployment
+apiVersion: v1                   # API Version of Deployment Object
+metadata:                        # Object Describtion
+  name: volconfigmap         # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning ConfigMap. Accessing content inside a file using volume mount, which is stored inside a configmap object &, configmap object created using a command and a normal file/config file. 
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  containers:
+   - name: c1
+     image: centos
+     command: ["/bin/bash", "-c", "while true; do echo Hello-Suraj; sleep 10; done;"]  # Running sleep comand for 10 secs
+     volumeMounts:                                    # Mount defination inside the container
+      - name: testconfigmap                           # Specifing to which volume this containers volume should belong/linked/mapped (Defined Below)
+        mountPath: "/tmp/config"                      # Configmap object folder will be mounted by to this "tmp/config" inside container
+  volumes:                                            # Defining the volume
+   - name: testconfigmap                              # Defining the name of the volume inside the pod 
+     configMap:
+       name: mymap                                    # This should match with the configmap name created in the first step
+       items:
+       - key: pod37_sampleconfig                      # The name of the file used while creating the configmap
+         path: sampleconfig                           # The name of the file in which you want to save the content of the original configmap file (This is optional, if you want you can change the name of the file)
+
+
+# ConfigMap is an object used to store non-confidential configuration data in key-value pairs. ConfigMaps are a way to decouple environment-specific configurations from the container images, which makes your applications more portable and manageable.
+

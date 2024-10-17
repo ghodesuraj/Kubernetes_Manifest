@@ -1,0 +1,24 @@
+kind: Pod                        # Object type Deployment
+apiVersion: v1                   # API Version of Deployment Object
+metadata:                        # Object Describtion
+  name: envconfigmap             # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning ConfigMap. Accessing content inside a file using environment variable, the file is stored inside a configmap object &, configmap object created using a command and a normal file/config file. 
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  containers:
+   - name: c1
+     image: centos
+     command: ["/bin/bash", "-c", "while true; do echo Hello-Suraj; sleep 10; done;"]  # Running sleep comand for 10 secs
+     env:
+     - name: MYENV                    # Defining Key of environment variable in which content of username is stored
+       valueFrom:
+         configMapKeyRef:
+           name: mymap                # Name of the configmap object which we created earlier
+           key: pod37_sampleconfig    # Name of the file in which data is stored in the first palce
+
+
+# ConfigMap is an object used to store non-confidential configuration data in key-value pairs. ConfigMaps are a way to decouple environment-specific configurations from the container images, which makes your applications more portable and manageable.
+

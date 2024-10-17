@@ -1,0 +1,29 @@
+kind: Pod                  # Object type
+apiVersion: v1             # API Version
+metadata:                  # Object Describtion
+  name: readinessprobepod  # Name of the object also the name of the pod
+  annotations:             # Description of the pod, it's usage.
+    description: Learning Readiness Probe, Checks if the container is ready to serve traffic. If a container fails the readiness probe, Kubernetes removes it from the Service's load balancer, preventing it from receiving any requests until it becomes healthy again. Useful for cases where an application may take some time to initialize or needs to perform some background tasks before it can start serving traffic (e.g., loading data into memory or initializing connections to external systems).
+  labels:                  # Defining labels details
+   day: fri                # Key1: value1
+   lecture: K8S            # Key2: value2
+   test: readiness         # Key3: value3
+spec:                      # Specifing the congfiguration of the containers
+  containers:              # Containers details
+    - name: c01            # Name of the container
+      image: httpd         # Base image which is used to create container
+    # command: ["/bin/bash", "-c", "touch /tmp/myfile; sleep 1000; done"]
+      env:                 # Defining the environment variables to be used inside the container
+      - name: MYNAME       # Key of the environment variable
+        value: Suraj       # Value of the environment variable
+      - name: Class        # Key of the environment variable
+        value: DevOps      # Value of the environment variable
+      ports:
+      - containerPort: 80          # Opening port 80 on container
+      readinessProbe:              # Defining the health check
+        initialDelaySeconds: 10    # Specfing the waiting time limit before it runs its first probe
+        httpGet:                   # HTTP URL to check periodically
+          path: /                  # It checks by running "curl http://localhost/" under "/" dir
+          port: 80                 # Specific port to check
+      # periodSeconds: 15          # Run the probe (the above command) every 5 sec
+      # timeoutSeconds: 25         # Waiting time limit if the cmd itself got stuck & not responding. If cat cmd doesn't give any out put for 15 sec, health check will be failed

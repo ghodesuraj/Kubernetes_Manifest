@@ -1,0 +1,28 @@
+kind: Pod                  # Object type
+apiVersion: v1             # API Version
+metadata:                  # Object Describtion
+  name: livenessprobepod   # Name of the object also the name of the pod
+  annotations:             # Description of the pod, it's usage.
+    description: Learning Liveness Probe, it purpose is to  determines whether a container is still running or alive. If a container fails the liveness probe, Kubernetes will restart the container. This is helpful for situations where a container may be stuck or deadlocked but not terminated. For example, if the application enters a bad state (e.g., an infinite loop), a liveness probe can detect this and restart the container.
+  labels:                  # Defining labels details
+   day: fri                # Key1: value1
+   lecture: K8S            # Key2: value2
+   test: liveness          # Key3: value3
+spec:                      # Specifing the congfiguration of the containers
+  containers:              # Containers details
+    - name: c01            # Name of the container
+      image: ubuntu        # Base image which is used to create container
+      command: ["/bin/bash", "-c", "touch /tmp/myfile; sleep 1000; done"]
+      env:                 # Defining the environment variables to be used inside the container
+      - name: MYNAME       # Key of the environment variable
+        value: Suraj       # Value of the environment variable
+      - name: Class        # Key of the environment variable
+        value: DevOps      # Value of the environment variable
+      livenessProbe:       # Defining the health check
+        exec:
+          command:         # Command to run periodically
+          - cat
+          - /tmp/myfile
+        initialDelaySeconds: 5   # Specfing the waiting time limit before it runs its first probe
+        periodSeconds: 5         # Run the probe (the above command) every 5 sec
+        timeoutSeconds: 15       # Waiting time limit if the cmd itself got stuck & not responding. If cat cmd doesn't give any out put for 15 sec, health check will be failed

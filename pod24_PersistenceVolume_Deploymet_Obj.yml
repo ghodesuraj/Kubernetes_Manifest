@@ -28,9 +28,9 @@ spec:
         image: centos
         command: ["/bin/bash", "-c", "sleep 10000"]  # Running sleep comand for 10000 secs
         volumeMounts:                                # Mount defination inside the container
-        - name: myvolume                             # Specifing to which volume this containers volume should belong/linked/mapped
+        - name: myvolume                             # Specifing to which volume this containers volume should belong/linked/mapped (Defined below)
           mountPath: "/tmp/c2dir"                    # Path of the directory/folder/Volume inside the container which will be linked to hostPath volume defined on the host machine.
       volumes:                                       # Defining the volume
-      - name: myvolume                               # Name of the hostPath volume 
+      - name: myvolume                               # Defining name to persistent volume 
         persistentVolumeClaim:
-          claimName: myebsvol                        # hostPath volume's directory on host machine
+          claimName: myebsvol                        # Persistent Volume object name which we created w.t.h.o. aws volume
