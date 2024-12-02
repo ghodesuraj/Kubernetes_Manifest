@@ -1,9 +1,14 @@
 kind: Pod # Object type
 apiVersion: v1 # API Version
-metadata: # Object Description
+metadata: # Object Describtion
   name: testpod # Name of the object also the name of the pod
-spec: # Specifying the configuration of the containers
+  annotations: # Description of the pod, it's usage.
+    description: Pod with two containers having LimitRange limits resource for CPU (Maximum Requirement of CPU).
+spec: # Specifing the congfiguration of the containers
   containers: # Containers details 
   - name: c01 # Name of the container 
     image: ubuntu # Base image which is used to create container  
     command: ["/bin/bash", "-c", "while true; do echo Hello-World; sleep 5; done"]
+    resources:
+      limits: # Maximum limit
+        cpu: "1" # Maximum 1000 Millicore

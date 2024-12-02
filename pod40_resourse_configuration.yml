@@ -1,0 +1,21 @@
+kind: Pod                        # Object type Deployment
+apiVersion: v1                   # API Version of Deployment Object
+metadata:                        # Object Description
+  name: resources            # Name of the object also the name of the pod
+  annotations:                   # Description of the pod, it's usage.
+    description: Learning ConfigMap. Accessing content inside a file using environment variable, the file is stored inside a configmap object &, configmap object created using a command and a normal file/config file. 
+  labels:                        # Defining labels details
+   day: fri                      # Key1: value1
+   lecture: K8S                  # Key2: value2
+spec:
+  containers:
+   - name: c1
+     image: centos
+     command: ["/bin/bash", "-c", "while true; do echo Hello-Suraj; sleep 10; done;"]  # Running sleep command for 10 secs
+     resources:
+       requests: 
+          memory: 500Mi    # This is minimum memory allocation [1 GiB is 1024 MiB (Mebibytes)]
+          cpu: 100m       # This is minimum cpu allocation [] 1 Core CPU is 1000m (milli Cores)]
+       limits:
+         memory: 600Mi    # This is maximum memory allocation
+         cpu: 200m        # This is maximum cpu allocation 

@@ -2,8 +2,18 @@ kind: Pod # Object type
 apiVersion: v1 # API Version
 metadata: # Object Description
   name: testpod # Name of the object also the name of the pod
+  annotations: # Description of the pod, it's usage.
+    description: Pod with two containers having LimitRange resource for Memory (Maximum & Minimum Requirement of Memory).
 spec: # Specifying the configuration of the containers
   containers: # Containers details 
   - name: c01 # Name of the container 
     image: ubuntu # Base image which is used to create container  
     command: ["/bin/bash", "-c", "while true; do echo Hello-World; sleep 5; done"]
+    resources:
+      limits:
+        memory: "800Mi" # Maximum Memory requirement
+      requests:
+        memory: "600Mi" # Minimum Memory Requirement
+
+
+

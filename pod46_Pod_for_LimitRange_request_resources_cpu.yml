@@ -3,12 +3,18 @@ apiVersion: v1 # API Version
 metadata: # Object Describtion
   name: testpod # Name of the object also the name of the pod
   annotations: # Description of the pod, it's usage.
-    description: Pod with two containers.
+    description: Pod with two containers having LimitRange request resource for CPU (Minimum Requirement of CPU).
 spec: # Specifing the congfiguration of the containers
   containers: # Containers details 
   - name: c01 # Name of the container 
     image: ubuntu # Base image which is used to create container  
     command: ["/bin/bash", "-c", "while true; do echo Hello-World; sleep 5; done"]
+    resources:
+      requests: # Requesting Minimum limit
+        cpu: "0.75" # Minimum 750 Millicore
   - name: c02 # Name of the container 
-    image: centos # Base image which is used to create container  
+    image: nginx # Base image which is used to create container  
     command: ["/bin/bash", "-c", "while true; do echo Hello-World of DevOps; sleep 5; done"]
+    resources:
+      requests: # Requesting Minimum limit
+        cpu: "0.75" # Minimum 750 Millicore

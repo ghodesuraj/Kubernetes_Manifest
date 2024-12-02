@@ -1,0 +1,10 @@
+kind: ResourceQuota        # Object type
+apiVersion: v1             # API Version
+metadata:                  # Object Description
+  name: myquota            # Name of the object also the name of the pod
+spec:  
+  hard:
+    limits.cpu: "400m"
+    limits.memory: "400Mi"
+    requests.cpu: "200m"
+    requests.memory: "200Mi"

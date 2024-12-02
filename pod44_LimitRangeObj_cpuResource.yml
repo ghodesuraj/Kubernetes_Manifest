@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-limit-range
+  #description: Creating LimitRange object to give limited usage of cpu to each container. Each container inside a pod can consume maximum user define recourse (eg. 1 millicore.)
+spec:
+  limits: # Defining limits
+  - default: # Defining default maximum cpu limit request
+      cpu: "1" # Default maximum limit 1000 millicores
+    defaultRequest: # Defining default minimum limit request
+      cpu: "0.5" # Default minimum limit 500 millicores
+    type: Container # Specifying that LimitRange should apply only for container

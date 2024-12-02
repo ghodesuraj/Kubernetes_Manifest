@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: myjob1
+spec:
+  template:
+    metadata:
+      name: testjob
+    spec:
+      containers:
+      - name: c01
+        image: centos # Base image which is used to create container  
+        command: ["/bin/bash", "-c", "echo Hello-World; sleep 15"]
+      restartPolicy: Never

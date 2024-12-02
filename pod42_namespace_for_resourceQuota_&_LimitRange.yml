@@ -1,0 +1,18 @@
+kind: Namespace            # Object type Namespace
+apiVersion: v1             # API Version
+metadata:                  # Object Describtion
+  name: testing            # Name of the object also the name of the pod
+  annotations:             # Description of the pod, it's usage.
+    description: Learning ResourceQuota. Creating namespace for ResourceQuota.
+  labels:                  # Defining labels details
+   day: fri                # Key1: value1
+   lecture: K8S            # Key2: value2
+   name: testing           # Key3: value3
+
+#Namespace is a way to organize and manage resources within a cluster.
+#It allows you to divide cluster resources between multiple users or teams, isolate workloads, and apply resource quotas or security policies specific to each namespace.
+#Essentially, namespaces provide a virtual cluster within a physical Kubernetes cluster.
+#Use Cases for Namespaces:
+#Multi-tenancy: When multiple teams or projects share a Kubernetes cluster, namespaces can be used to isolate their workloads.
+#Resource Quotas: You can limit the resources (CPU, memory, etc.) available to a namespace to control how much of the cluster’s resources the workloads in that namespace can consume.
+#Separation of Environments: Different environments like development, testing, and production can each have their own namespaces.

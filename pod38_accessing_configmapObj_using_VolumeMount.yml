@@ -1,6 +1,6 @@
 kind: Pod                        # Object type Deployment
 apiVersion: v1                   # API Version of Deployment Object
-metadata:                        # Object Describtion
+metadata:                        # Object Description
   name: volconfigmap         # Name of the object also the name of the pod
   annotations:                   # Description of the pod, it's usage.
     description: Learning ConfigMap. Accessing content inside a file using volume mount, which is stored inside a configmap object &, configmap object created using a command and a normal file/config file. 
@@ -11,9 +11,9 @@ spec:
   containers:
    - name: c1
      image: centos
-     command: ["/bin/bash", "-c", "while true; do echo Hello-Suraj; sleep 10; done;"]  # Running sleep comand for 10 secs
-     volumeMounts:                                    # Mount defination inside the container
-      - name: testconfigmap                           # Specifing to which volume this containers volume should belong/linked/mapped (Defined Below)
+     command: ["/bin/bash", "-c", "while true; do echo Hello-Suraj; sleep 10; done;"]  # Running sleep command for 10 secs
+     volumeMounts:                                    # Mount definition inside the container
+      - name: testconfigmap                           # Specifying to which volume this containers volume should belong/linked/mapped (Defined Below)
         mountPath: "/tmp/config"                      # Configmap object folder will be mounted by to this "tmp/config" inside container
   volumes:                                            # Defining the volume
    - name: testconfigmap                              # Defining the name of the volume inside the pod 

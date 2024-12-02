@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: myjob2
+spec:
+  template:
+    metadata:
+      name: simple-job-pod
+    spec:
+      containers:
+      - name: my-container
+        image: busybox
+        command: ["bin/sh", "-c", "echo Hello Kubernetes! && sleep 10"]
+      restartPolicy: Never
+# backoffLimit: 4
